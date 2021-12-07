@@ -30,9 +30,8 @@ fn main() {
         .pid_file("/tmp/test.pid") // Every method except `new` and `start`
         .chown_pid_file(true)      // is optional, see `Daemonize` documentation
         .working_directory("/tmp") // for default behaviour.
-        .user("nobody")
-        .group("daemon") // Group name
-        .group(2)        // or group id.
+        .user("me")
+        .group("eyesafe-daemon") // Group name  
         .umask(0o777)    // Set umask, `0o027` by default.
         .stdout(stdout)  // Redirect stdout to `/tmp/daemon.out`.
         .stderr(stderr)  // Redirect stderr to `/tmp/daemon.err`.
@@ -51,7 +50,7 @@ fn main() {
 
     let mut sched = JobScheduler::new();
     sched.add(
-        Job::new("0 */20 * * * *".parse().unwrap(), || {
+        Job::new("1/10 * * * * *".parse().unwrap(), || {
             Command::new("osascript")
             .arg("-e")
             .arg(cmd.clone())
