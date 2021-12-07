@@ -1,0 +1,8 @@
+[package]
+name = "EyeSafe"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+daemonize = "*"
+job_scheduler = "*"
